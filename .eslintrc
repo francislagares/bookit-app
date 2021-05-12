@@ -20,7 +20,6 @@
     "prettier", 
     "plugin:react/recommended", // React rules
     "plugin:react-hooks/recommended", // React hooks rules
-    "plugin:testing-library/recommended",
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended",
     "plugin:jsx-a11y/recommended" // Accessibility rules
