@@ -1,46 +1,33 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { NextHandler } from 'next-connect';
 import Room from '../models/room';
+import catchAsyncErrors from 'middlewares/catchAsyncErrors';
 import ErrorHandler from 'utils/errorHandler';
 
-const allRooms = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
+const allRooms = catchAsyncErrors(
+  async (req: NextApiRequest, res: NextApiResponse) => {
     const rooms = await Room.find();
 
     res.status(200).json({
       success: true,
       rooms,
     });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
+  },
+);
 
-const newRoom = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
+const newRoom = catchAsyncErrors(
+  async (req: NextApiRequest, res: NextApiResponse) => {
     const room = await Room.create(req.body);
 
     res.status(201).json({
       success: true,
       room,
     });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
+  },
+);
 
-const getSingleRoom = async (
-  req: NextApiRequest,
-  res: NextApiResponse,
-  next: NextHandler,
-) => {
-  try {
+const getSingleRoom = catchAsyncErrors(
+  async (req: NextApiRequest, res: NextApiResponse, next: NextHandler) => {
     const room = await Room.findById(req.query.id);
 
     if (!room) {
@@ -51,18 +38,11 @@ const getSingleRoom = async (
       success: true,
       room,
     });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
+  },
+);
 
-  return true;
-};
-
-const updateRoom = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
+const updateRoom = catchAsyncErrors(
+  async (req: NextApiRequest, res: NextApiResponse) => {
     let room = await Room.findById(req.query.id);
 
     if (!room) {
@@ -82,18 +62,11 @@ const updateRoom = async (req: NextApiRequest, res: NextApiResponse) => {
       success: true,
       room,
     });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
+  },
+);
 
-  return true;
-};
-
-const deleteRoom = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
+const deleteRoom = catchAsyncErrors(
+  async (req: NextApiRequest, res: NextApiResponse) => {
     const room = await Room.findById(req.query.id);
 
     if (!room) {
@@ -109,14 +82,7 @@ const deleteRoom = async (req: NextApiRequest, res: NextApiResponse) => {
       success: true,
       message: 'Room is deleted',
     });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
-
-  return true;
-};
+  },
+);
 
 export { allRooms, newRoom, getSingleRoom, updateRoom, deleteRoom };
