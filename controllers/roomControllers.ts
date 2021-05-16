@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { NextHandler } from 'next-connect';
 import Room from '../models/room';
+import ErrorHandler from 'utils/errorHandler';
 
 const allRooms = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -33,15 +35,16 @@ const newRoom = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-const getSingleRoom = async (req: NextApiRequest, res: NextApiResponse) => {
+const getSingleRoom = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  next: NextHandler,
+) => {
   try {
     const room = await Room.findById(req.query.id);
 
     if (!room) {
-      return res.status(404).json({
-        success: false,
-        message: 'Room not found with this ID',
-      });
+      return next(new ErrorHandler('Room not found with this ID', 404));
     }
 
     res.status(200).json({
