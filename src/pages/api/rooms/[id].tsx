@@ -1,5 +1,9 @@
 import nextConnect from 'next-connect';
-import { getSingleRoom } from 'controllers/roomControllers';
+import {
+  deleteRoom,
+  getSingleRoom,
+  updateRoom,
+} from 'controllers/roomControllers';
 import dbConnect from 'database/dbConnect';
 
 const roomsHandler = nextConnect();
@@ -7,5 +11,7 @@ const roomsHandler = nextConnect();
 dbConnect();
 
 roomsHandler.get(getSingleRoom);
+roomsHandler.put(updateRoom);
+roomsHandler.delete(deleteRoom);
 
 export default roomsHandler;
