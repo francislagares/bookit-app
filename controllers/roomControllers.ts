@@ -33,4 +33,27 @@ const newRoom = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export { allRooms, newRoom };
+const getSingleRoom = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const room = await Room.findById(req.query.id);
+
+    if (!room) {
+      return res.status(404).json({
+        success: false,
+        message: 'Room not found with this ID',
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      room,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export { allRooms, newRoom, getSingleRoom };
