@@ -1,33 +1,590 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
-
-* {
-  box-sizing: border-box;
-}
-
+html,
 body {
+  width: 100%;
+  height: 100%;
   margin: 0;
-  font-family: 'Open Sans', 'Lato', sans-serif;
-  color: #414141;
-  background-color: #e4f1f1;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Lato', sans-serif;
-  color: #2b2b2b;
+/* Scroll Bar */
+
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
 }
 
-ul {
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(66, 66, 66, .2);
+  border: 0;
+  background-clip: padding-box;
+  border-radius: 5px;
+}
+
+/* Loader */
+
+.center-loader {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 150px 0;
+}
+
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #e61e4d;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .lds-ellipsis div:nth-child(1) {
+    left: 8px;
+    animation: none;
+  }
+}
+
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 .6s infinite;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .lds-ellipsis div:nth-child(2) {
+    left: 8px;
+    animation: none;
+  }
+}
+
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 .6s infinite;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .lds-ellipsis div:nth-child(3) {
+    left: 32px;
+    animation: none;
+  }
+}
+
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 .6s infinite;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .lds-ellipsis div:nth-child(4) {
+    left: 56px;
+    animation: none;
+  }
+}
+
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 .6s infinite;
+}
+
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+/* Button Loader */
+.lds-dual-ring {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .lds-dual-ring::after {
+    width: 24px;
+    height: 24px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    content: ' ';
+    display: block;
+    border-color: #fff transparent #fff transparent;
+    animation: none;
+  }
+}
+
+.lds-dual-ring::after {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  content: ' ';
+  display: block;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Login & Register */
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  font-weight: 700;
+}
+
+.wrapper form {
+  padding: 2.5rem 3rem;
+}
+
+.wrapper form .btn,
+.booking-btn,
+.update-btn,
+#review_btn,
+.new-room-btn,
+#forgot_password_button,
+#new_password_button,
+.search-form .btn {
+  background-color: #e61e4d;
+  border-color: #e61e4d;
+  color: white;
+  margin-top: 2.5rem;
+  font-weight: bold;
+}
+
+.review-btn {
+  background-color: #e61e4d;
+  border-color: #e61e4d;
+  margin-top: 2rem;
+  border-radius: 5rem;
+}
+
+.new-room-btn {
+  background-color: #e61e4d;
+  border-color: #e61e4d;
+}
+
+.wrapper form a {
+  color: grey;
+  font-size: .9rem;
+}
+
+.react-datepicker {
+  width: 100%;
+}
+
+.react-datepicker__month-container {
+  float: left;
+  width: 100%;
+}
+
+/* Avatar */
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+/* Header User Profile */
+
+.avatar-nav {
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-right: .6rem;
+}
+
+/* Navbar */
+nav {
+  background-color: white;
+  padding: 1rem 1rem;
+  -webkit-box-shadow: 0 4px 6px -6px #222;
+  -moz-box-shadow: 0 4px 6px -6px #222;
+  box-shadow: 0 4px 6px -6px #222;
+}
+
+.login-header-btn {
+  background-color: #e61e4d;
+}
+
+.login-header-btn a {
+  color: white;
+}
+
+/* Home page */
+
+.stays-heading {
+  font-weight: 700;
+}
+
+.back-to-search {
+  color: #e61e4d;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.back-to-search:hover,
+.back-to-search:focus {
+  color: #e61e4d;
+}
+
+.card {
+  height: 100%;
+  border: 0;
+}
+
+.card-title a {
+  color: #2e2e2e;
+  font-size: 1.2rem;
+}
+
+.card-title a:hover,
+.card-title a:focus {
+  color: #e61e4d;
+  text-decoration: none;
+}
+
+.card-body {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.card-text {
+  color: black;
+  font-size: 1.2rem;
+}
+
+.view-btn {
+  background-color: #e61e4d;
+}
+
+.view-btn a {
+  color: white;
+}
+
+.card-img-top {
+  height: 170px;
+  border-radius: .8rem;
+}
+
+.ratings {
+  color: #e61e4d;
+  font-size: 1.2rem;
+}
+
+#no_of_reviews {
+  color: grey;
+  font-size: .85rem;
+  margin-left: .5rem;
+}
+
+/* Ratings */
+
+.rating-outer {
+  display: inline-block;
+  position: relative;
+  font-family: FontAwesome;
+  color: #e61e4d;
+}
+
+.rating-outer::before {
+  content: '\f006 \f006 \f006 \f006 \f006';
+}
+
+.rating-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.rating-inner::before {
+  content: '\f005 \f005 \f005 \f005 \f005';
+  color: #e61e4d;
+}
+
+/* Room Details Page */
+
+.booking-btn:hover,
+.booking-btn:focus {
+  color: white;
+}
+
+.price-per-night {
+  font-size: 1.3rem;
+}
+
+.booking-card {
+  padding: 5px 10px;
+  border: 1px solid #e3e3e3;
+  border-radius: 20px;
+}
+
+.room-feature {
+  color: #404040;
+  font-size: 1.1rem;
+}
+
+.room-feature p {
+  margin-left: .4rem;
+  display: inline-block;
+}
+
+/* Reviews */
+.review_user {
+  color: grey;
+  font-size: .8rem;
+}
+
+.rating {
+  margin-top: 10rem;
+}
+
+.stars {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+}
+
+.star {
+  color: #e3e3e3;
+  font-size: 3rem;
+  display: inline;
   list-style: none;
-  margin: 0;
+  padding-left: .9rem;
+}
+
+.star:first-child {
+  padding-left: 0;
+}
+
+.red {
+  color: #e61e4d;
+}
+
+.light-red {
+  color: #f74f77;
+}
+
+/* Footer */
+footer {
+  bottom: 0;
+  width: 100%;
+  color: grey;
+  margin-top: 6rem;
+}
+
+/* Stripe payment design */
+
+@media screen and (prefers-reduced-motion: reduce) {
+  #stripe_pay_btn {
+    height: 40px;
+    padding: 0 14px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    border: 0;
+    border-radius: 4px;
+    white-space: nowrap;
+    outline: 0;
+    display: inline-block;
+    line-height: 40px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+    text-transform: uppercase;
+    letter-spacing: .025em;
+    background-color: #6772e5;
+    -webkit-transition: all 150ms ease;
+    transition: none;
+    margin-top: 10px;
+  }
+}
+
+#stripe_pay_btn {
+  height: 40px;
+  padding: 0 14px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  border: 0;
+  border-radius: 4px;
+  white-space: nowrap;
+  outline: 0;
+  display: inline-block;
+  line-height: 40px;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+  text-transform: uppercase;
+  letter-spacing: .025em;
+  background-color: #6772e5;
+  -webkit-transition: all 150ms ease;
+  transition: all 150ms ease;
+  margin-top: 10px;
+}
+
+#stripe_pay_btn:hover,
+#stripe_pay_btn:focus {
+  color: #fff;
+  cursor: pointer;
+  background-color: #7795f8;
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+}
+
+.StripeElement {
+  display: block;
+  margin: 10px 0 20px 0;
+  max-width: 500px;
+  padding: 10px 14px;
+  font-size: 1em;
+  font-family: 'Source Code Pro', monospace;
+  box-shadow:
+    rgba(50, 50, 93, .14902) 0 1px 3px,
+    rgba(0, 0, 0, .0196078) 0 1px 0;
+  border: 0;
+  outline: 0;
+  border-radius: 4px;
+  background: white;
+}
+
+input::placeholder {
+  color: #aab7c4;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .StripeElement--focus {
+    box-shadow:
+      rgba(50, 50, 93, .109804) 0 4px 6px,
+      rgba(0, 0, 0, .0784314) 0 1px 3px;
+    -webkit-transition: all 150ms ease;
+    transition: none;
+  }
+}
+
+.StripeElement--focus {
+  box-shadow:
+    rgba(50, 50, 93, .109804) 0 4px 6px,
+    rgba(0, 0, 0, .0784314) 0 1px 3px;
+  -webkit-transition: all 150ms ease;
+  transition: all 150ms ease;
+}
+
+.StripeElement.IdealBankElement,
+.StripeElement.FpxBankElement,
+.StripeElement.PaymentRequestButton {
   padding: 0;
 }
 
-.center {
-  margin: auto;
+.StripeElement.PaymentRequestButton {
+  height: 40px;
+}
+
+/* Pagination */
+.page-item.active .page-link {
+  background-color: #e61e4d;
+  border-color: #e61e4d;
+}
+
+.page-link {
+  color: #e61e4d;
+}
+
+.page-link:hover,
+.page-link:focus {
+  color: #e61e4d;
+}
+
+/* Booking Details */
+.booking-details p {
+  margin-left: 1.5rem;
+}
+
+.redColor {
+  color: red;
+}
+
+.greenColor {
+  color: green;
+}
+
+/* 404 Page */
+
+.page-not-found-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  min-height: 68vh;
+}
+
+#title_404 {
+  color: #e61e4d;
+  font-size: 7rem;
+}
+
+#description_404 {
+  color: grey;
 }
