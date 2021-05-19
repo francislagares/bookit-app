@@ -25,10 +25,12 @@
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
+    "axios": "^0.21.1",
     "dotenv": "^9.0.2",
     "mongoose": "^5.12.9",
     "msw": "^0.28.2",
     "next": "10.2.0",
+    "next-absolute-url": "^1.2.2",
     "next-connect": "^0.10.1",
     "next-redux-wrapper": "^6.0.2",
     "react": "17.0.2",
