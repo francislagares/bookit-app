@@ -1,8 +1,14 @@
 import { HYDRATE, createWrapper } from 'next-redux-wrapper';
-import { createStore, applyMiddleware, Middleware } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  Middleware,
+  CombinedState,
+  AnyAction,
+} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
-import reducers from './reducers';
+import reducers, { RootState } from './reducers';
 
 const bindMiddleware = (middleware: Middleware[]) => {
   if (process.env.NODE_ENV === 'production') {
@@ -12,8 +18,11 @@ const bindMiddleware = (middleware: Middleware[]) => {
   return applyMiddleware(...middleware);
 };
 
-const reducer = (state, action) => {
-  if (action.type === 'HYDRATE') {
+const reducer = (
+  state: CombinedState<RootState> | undefined,
+  action: AnyAction,
+) => {
+  if (action.type === HYDRATE) {
     const nextState = {
       ...state,
       ...action.payload,
