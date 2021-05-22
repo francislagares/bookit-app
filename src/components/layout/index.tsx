@@ -1,8 +1,11 @@
 import React, { ReactNode } from 'react';
 import Head from 'next/head';
 
+import { ToastContainer } from 'react-toastify';
 import Footer from './Footer';
 import Header from './Header';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 interface ILayoutProps {
   children: ReactNode;
@@ -22,6 +25,7 @@ const Layout = ({
     </Head>
 
     <Header />
+    <ToastContainer position='bottom-right' />
     {children}
     <Footer />
   </div>
