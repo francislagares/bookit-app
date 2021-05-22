@@ -18,12 +18,14 @@ import {
 } from 'src/interfaces';
 
 export const getRooms =
-  (req: IncomingMessage) =>
+  (req: IncomingMessage, currentPage = 1) =>
   async (dispatch: Dispatch<IAllRoomsSuccess | IAllRoomsFail>) => {
     try {
       const { origin } = absoluteUrl(req);
 
-      const { data } = await axios.get(`${origin}/api/rooms`);
+      const { data } = await axios.get(
+        `${origin}/api/rooms?page=${currentPage}`,
+      );
 
       dispatch({
         type: ALL_ROOMS_SUCCESS,
