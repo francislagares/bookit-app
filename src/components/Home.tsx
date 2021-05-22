@@ -1,15 +1,23 @@
 import React, { useEffect } from 'react';
+import Head from 'next/head';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useTypedSelector } from '../hooks/useTypedSelector';
+import { clearErrors } from '../redux/actions/roomActions';
 import RoomItem from './room/RoomItem';
 import { IRoom } from 'src/interfaces';
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   const { rooms, error } = useTypedSelector(state => state.allRooms);
 
   useEffect(() => {
-    toast.error(error);
-  }, [error]);
+    if (error) {
+      toast.error(error);
+      dispatch(clearErrors());
+    }
+  }, [error, dispatch]);
 
   return (
     <section id='rooms' className='container mt-5'>
