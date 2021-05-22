@@ -31,7 +31,12 @@ export interface IState {
   rooms: IRoom[];
 }
 
-export type IAction = IAllRoomsSuccess | IAllRoomsFail | IClearErrors;
+export type IAction =
+  | IAllRoomsSuccess
+  | IAllRoomsFail
+  | IRoomDetailsSuccess
+  | IRoomDetailsFail
+  | IClearErrors;
 
 export interface IAllRoomsSuccess {
   type: 'ALL_ROOMS_SUCCESS';
@@ -45,6 +50,18 @@ export interface IAllRoomsSuccess {
 
 export interface IAllRoomsFail {
   type: 'ALL_ROOMS_FAIL';
+  payload: string | null;
+}
+
+export interface IRoomDetailsSuccess {
+  type: 'ROOM_DETAILS_SUCCESS';
+  payload: {
+    room: IRoom;
+  };
+}
+
+export interface IRoomDetailsFail {
+  type: 'ROOM_DETAILS_FAIL';
   payload: string | null;
 }
 
