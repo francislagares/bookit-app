@@ -14,7 +14,7 @@ export interface IRoom extends Document {
   roomCleaning: boolean;
   ratings: number;
   numOfReviews: number;
-  images: [{ public_id: string; uri: string }];
+  images: [{ public_id: string; url: string }];
   category: 'King' | 'Single' | 'Twins';
   reviews: [
     {

@@ -1,4 +1,5 @@
 export interface IRoom {
+  _id: string;
   name: string;
   pricePerNight: number;
   description: string;
@@ -12,7 +13,7 @@ export interface IRoom {
   roomCleaning: boolean;
   ratings: number;
   numOfReviews: number;
-  images: [{ public_id: string; uri: string }];
+  images: [{ public_id: string; url: string }];
   category: 'King' | 'Single' | 'Twins';
   reviews: [
     {
