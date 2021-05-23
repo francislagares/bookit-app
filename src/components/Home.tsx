@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Pagination from 'react-js-pagination';
 import { useDispatch } from 'react-redux';
@@ -16,7 +17,7 @@ const Home = () => {
   const { rooms, resPerPage, roomsCount, filteredRoomsCount, error } =
     useTypedSelector(state => state.allRooms);
 
-  let { page = 1 } = router.query;
+  let { location, page = 1 } = router.query;
   page = Number(page);
 
   useEffect(() => {
@@ -30,13 +31,23 @@ const Home = () => {
     window.location.href = `/?page=${pageNumber}`;
   };
 
+  let count = roomsCount;
+  if (location) {
+    count = filteredRoomsCount;
+  }
+
   return (
     <>
       <section id='rooms' className='container mt-5'>
-        <h2 className='mb-3 ml-2 stays-heading'>Stays in New York</h2>
-        <a href='#' className='ml-2 back-to-search'>
-          <i className='fa fa-arrow-left' /> Back to Search
-        </a>
+        <h2 className='mb-3 ml-2 stays-heading'>
+          {location ? `Rooms in ${location}` : 'All Rooms'}
+        </h2>
+
+        <Link href='/search'>
+          <a className='ml-2 back-to-search'>
+            <i className='fa fa-arrow-left' /> Back to Search
+          </a>
+        </Link>
         <div className='row'>
           {rooms && rooms.length === 0 ? (
             <div className='alert alert-danger'>
@@ -48,7 +59,7 @@ const Home = () => {
         </div>
       </section>
 
-      {resPerPage < roomsCount && (
+      {resPerPage < count && (
         <div className='d-flex justify-content-center mt-5'>
           <Pagination
             activePage={page}

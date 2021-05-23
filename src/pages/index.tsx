@@ -13,7 +13,7 @@ const Index = () => (
 
 export const getServerSideProps = wrapper.getServerSideProps(
   async ({ req, query, store }) => {
-    await store.dispatch(getRooms(req, Number(query.page)));
+    await store.dispatch(getRooms(req, Number(query.page), query.location));
   },
 );
 

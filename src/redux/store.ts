@@ -5,7 +5,7 @@ import thunkMiddleware from 'redux-thunk';
 import reducers, { RootState } from './reducers';
 
 const bindMiddleware = (middleware: Middleware[]) => {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV !== 'production') {
     return composeWithDevTools(applyMiddleware(...middleware));
   }
 
