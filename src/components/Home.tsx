@@ -50,7 +50,7 @@ const Home = () => {
         </Link>
         <div className='row'>
           {rooms && rooms.length === 0 ? (
-            <div className='alert alert-danger'>
+            <div className='alert alert-danger mt-5 w-100'>
               <b>No Rooms.</b>
             </div>
           ) : (

@@ -18,14 +18,23 @@ import {
 } from 'src/interfaces';
 
 export const getRooms =
-  (req: IncomingMessage, currentPage = 1, location = '') =>
+  (
+    req: IncomingMessage,
+    currentPage = 1,
+    location = '',
+    guests: number,
+    category: string,
+  ) =>
   async (dispatch: Dispatch<IAllRoomsSuccess | IAllRoomsFail>) => {
     try {
       const { origin } = absoluteUrl(req);
 
-      const { data } = await axios.get(
-        `${origin}/api/rooms?page=${currentPage}&location=${location}`,
-      );
+      let link = `${origin}/api/rooms?page=${currentPage}&location=${location}`;
+
+      if (guests) link = link.concat(`&guestCapacity=${guests}`);
+      if (category) link = link.concat(`&category=${category}`);
+
+      const { data } = await axios.get(link);
 
       dispatch({
         type: ALL_ROOMS_SUCCESS,
