@@ -1,4 +1,21 @@
-export interface IRoom {
+import { Document } from 'mongoose';
+
+export interface IUser extends Document {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  avatar: {
+    public_id: string;
+    url: string;
+  };
+  role: string;
+  createdAt: Date;
+  resetPasswordToken: string;
+  resetPasswordExpire: Date;
+}
+
+export interface IRoom extends Document {
   _id: string;
   name: string;
   pricePerNight: number;
@@ -17,13 +34,13 @@ export interface IRoom {
   category: 'King' | 'Single' | 'Twins';
   reviews: [
     {
-      user: IUser;
+      user: IUser['_id'];
       name: string;
       rating: number;
       comment: string;
     },
   ];
-  user: IUser;
+  user: IUser['_id'];
   createdAt: Date;
 }
 
