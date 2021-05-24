@@ -1,32 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
-
-export interface IRoom extends Document {
-  name: string;
-  pricePerNight: number;
-  description: string;
-  address: string;
-  guestCapacity: number;
-  numOfBeds: number;
-  internet: boolean;
-  breakfast: boolean;
-  airConditioned: boolean;
-  petsAllowed: boolean;
-  roomCleaning: boolean;
-  ratings: number;
-  numOfReviews: number;
-  images: [{ public_id: string; url: string }];
-  category: 'King' | 'Single' | 'Twins';
-  reviews: [
-    {
-      user: IUser['_id'];
-      name: string;
-      rating: number;
-      comment: string;
-    },
-  ];
-  user: IUser['_id'];
-  createdAt: Date;
-}
+import mongoose, { Schema } from 'mongoose';
+import { IRoom } from 'src/interfaces';
 
 const roomSchema: Schema = new mongoose.Schema({
   name: {
@@ -108,7 +81,7 @@ const roomSchema: Schema = new mongoose.Schema({
   reviews: [
     {
       user: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
       },
@@ -127,7 +100,7 @@ const roomSchema: Schema = new mongoose.Schema({
     },
   ],
   user: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: false,
   },
