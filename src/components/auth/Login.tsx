@@ -70,7 +70,7 @@ const Login = () => {
               {loading ? <ButtonLoader /> : 'LOGIN'}
             </button>
 
-            <a href='#' className='float-right mt-3'>
+            <a href='/register' className='float-right mt-3'>
               New User?
             </a>
           </form>
