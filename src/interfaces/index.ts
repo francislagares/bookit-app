@@ -53,7 +53,23 @@ export type IAction =
   | IAllRoomsFail
   | IRoomDetailsSuccess
   | IRoomDetailsFail
+  | IRegisterUserRequest
+  | IRegisterUserSuccess
+  | IRegisterUserFail
   | IClearErrors;
+
+export interface IRegisterUserRequest {
+  type: 'REGISTER_USER_REQUEST';
+}
+
+export interface IRegisterUserSuccess {
+  type: 'REGISTER_USER_SUCCESS';
+}
+
+export interface IRegisterUserFail {
+  type: 'REGISTER_USER_FAIL';
+  payload: string | null;
+}
 
 export interface IAllRoomsSuccess {
   type: 'ALL_ROOMS_SUCCESS';
